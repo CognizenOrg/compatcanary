@@ -12,14 +12,14 @@ inputs:
     description: Model ID used for live probes
     required: true
   profile:
-    description: Compatibility profile: modern or chat
+    description: "Compatibility profile: modern or chat"
     required: false
     default: modern
   api-key:
     description: API key for the endpoint
     required: false
   format:
-    description: Report format: markdown, json, or text
+    description: "Report format: markdown, json, or text"
     required: false
     default: markdown
   output:
@@ -31,7 +31,7 @@ inputs:
     required: false
     default: "30"
   fail-on:
-    description: Failure policy: required, any, or never
+    description: "Failure policy: required, any, or never"
     required: false
     default: required
 outputs:
