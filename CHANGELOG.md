@@ -2,6 +2,11 @@
 
 All notable changes to CompatCanary will be documented here.
 
+## 0.2.2 — 2026-07-11
+
+- Reduced the npm package to runtime files and public technical documentation.
+- Removed internal planning and launch-operation documents from public distribution.
+
 ## 0.2.1 — 2026-07-11
 
 - Expanded the public matrix from three to eleven live reports.
