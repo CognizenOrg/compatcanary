@@ -20,6 +20,19 @@ function calculateScore(results) {
   return total === 0 ? 0 : Math.round((earned / total) * 100);
 }
 
+function reportUrl(rawUrl) {
+  try {
+    const parsed = new URL(rawUrl);
+    parsed.username = "";
+    parsed.password = "";
+    parsed.search = "";
+    parsed.hash = "";
+    return parsed.toString().replace(/\/$/, "");
+  } catch {
+    return "[invalid URL]";
+  }
+}
+
 export async function scanEndpoint(options, probeSet = defaultProbes) {
   const startedAt = new Date();
   const config = {
@@ -71,7 +84,7 @@ export async function scanEndpoint(options, probeSet = defaultProbes) {
   return {
     schemaVersion: "compatcanary.report.v1",
     scanner: { name: "compatcanary", version: "0.1.0" },
-    target: { baseUrl: config.baseUrl, model: config.model, profile },
+    target: { baseUrl: reportUrl(config.baseUrl), model: config.model, profile },
     startedAt: startedAt.toISOString(),
     completedAt: completedAt.toISOString(),
     durationMs: completedAt.getTime() - startedAt.getTime(),

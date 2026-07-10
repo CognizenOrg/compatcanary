@@ -52,6 +52,20 @@ test("the chat profile excludes Responses API probes", async () => {
   });
 });
 
+test("reports remove URL credentials and query strings", async () => {
+  const report = await scanEndpoint(
+    {
+      baseUrl: "https://user:secret@example.test/v1?token=hidden#private",
+      model: "canary-model",
+      profile: "chat",
+      timeoutMs: 20,
+      headers: {},
+    },
+    [],
+  );
+  assert.equal(report.target.baseUrl, "https://example.test/v1");
+});
+
 test("a broken stream produces actionable failure evidence", async () => {
   await withServer("broken-stream", async (baseUrl) => {
     const report = await scanEndpoint({

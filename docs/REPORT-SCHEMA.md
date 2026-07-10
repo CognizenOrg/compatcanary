@@ -26,3 +26,5 @@ The schema is append-only within version 1. Consumers should ignore unknown fiel
 ## Privacy
 
 Reports may expose private endpoint URLs, model identifiers, response excerpts on HTTP errors, and timing data. Review reports before publishing them.
+
+CompatCanary removes URL credentials, query strings, and fragments from the target URL recorded in reports. Custom path segments and model identifiers are retained because they are often necessary for reproduction.

@@ -23,3 +23,39 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm test
+
+  action-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Start compatible fixture
+        run: |
+          node test/fixtures/mock-server.js > /tmp/compatcanary-mock.log 2>&1 &
+          for attempt in {1..20}; do
+            if curl --silent --fail http://127.0.0.1:8787/v1/models >/dev/null; then
+              exit 0
+            fi
+            sleep 0.25
+          done
+          cat /tmp/compatcanary-mock.log
+          exit 1
+      - name: Run CompatCanary action
+        id: canary
+        uses: ./
+        with:
+          base-url: http://127.0.0.1:8787/v1
+          model: canary-model
+          output: /tmp/compatcanary-report.md
+      - name: Verify action outputs
+        env:
+          SCORE: ${{ steps.canary.outputs.score }}
+          COMPATIBLE: ${{ steps.canary.outputs.compatible }}
+        run: |
+          test "$SCORE" = "100"
+          test "$COMPATIBLE" = "true"
+          grep --fixed-strings '**100/100**' /tmp/compatcanary-report.md
