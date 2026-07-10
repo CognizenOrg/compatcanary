@@ -31,16 +31,18 @@ The default `modern` profile covers Chat Completions plus the Responses API. Use
 Requires Node.js 20 or newer.
 
 ```bash
-npx compatcanary scan \
+npx --yes github:guvenemre/compatcanary scan \
   --base-url https://your-provider.example/v1 \
   --model your-model
 ```
+
+The npm package name is reserved for the imminent `v0.1.0` registry release. Until then, the command above installs directly from this public repository.
 
 For an authenticated endpoint:
 
 ```bash
 export OPENAI_API_KEY='your-key'
-npx compatcanary scan \
+npx --yes github:guvenemre/compatcanary scan \
   --base-url https://your-provider.example/v1 \
   --model your-model
 ```
@@ -51,7 +53,7 @@ Or use the conventional environment variables:
 export OPENAI_BASE_URL='https://your-provider.example/v1'
 export OPENAI_MODEL='your-model'
 export OPENAI_API_KEY='your-key'
-npx compatcanary
+npx --yes github:guvenemre/compatcanary
 ```
 
 CompatCanary does not require an API key for endpoints that do not require authentication.
@@ -59,7 +61,7 @@ CompatCanary does not require an API key for endpoints that do not require authe
 Chat-only implementations can select the narrower profile:
 
 ```bash
-npx compatcanary scan \
+npx --yes github:guvenemre/compatcanary scan \
   --base-url https://your-provider.example/v1 \
   --model your-model \
   --profile chat
@@ -82,7 +84,7 @@ Required compatibility: FAIL
 Generate evidence for a pull request or issue:
 
 ```bash
-npx compatcanary \
+npx --yes github:guvenemre/compatcanary \
   --base-url "$OPENAI_BASE_URL" \
   --model "$OPENAI_MODEL" \
   --format markdown \
@@ -92,7 +94,7 @@ npx compatcanary \
 JSON output follows the versioned schema `compatcanary.report.v1`:
 
 ```bash
-npx compatcanary \
+npx --yes github:guvenemre/compatcanary \
   --base-url "$OPENAI_BASE_URL" \
   --model "$OPENAI_MODEL" \
   --format json \
@@ -116,7 +118,7 @@ jobs:
   compatcanary:
     runs-on: ubuntu-latest
     steps:
-      - uses: guvenemre/compatcanary@v0.1
+      - uses: guvenemre/compatcanary@main
         id: canary
         with:
           base-url: ${{ vars.OPENAI_BASE_URL }}
@@ -139,7 +141,7 @@ The action outputs `score`, `compatible`, and `report`.
 Bearer authentication is added automatically when a key is supplied. Additional headers can be repeated:
 
 ```bash
-npx compatcanary \
+npx --yes github:guvenemre/compatcanary \
   --base-url https://gateway.example/v1 \
   --model deployed-model \
   --header 'X-Tenant: acme' \

@@ -18,7 +18,7 @@ Scores expire as software and hosted endpoints change. The planned hosted index 
 Run:
 
 ```bash
-npx compatcanary \
+npx --yes github:guvenemre/compatcanary \
   --base-url "$OPENAI_BASE_URL" \
   --model "$OPENAI_MODEL" \
   --format json \
