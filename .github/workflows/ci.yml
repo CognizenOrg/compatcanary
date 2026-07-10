@@ -23,6 +23,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm test
+      - run: npm run evidence:check
 
   action-smoke:
     runs-on: ubuntu-latest

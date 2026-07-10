@@ -1,6 +1,6 @@
 {
   "name": "compatcanary",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Evidence-first compatibility scanner for OpenAI-style APIs",
   "type": "module",
   "bin": {
@@ -10,7 +10,9 @@
     ".": "./src/index.js"
   },
   "scripts": {
-    "check": "node --check src/cli.js && node --check src/action.js",
+    "check": "node --check src/cli.js && node --check src/action.js && node --check src/evidence.js && node --check scripts/build-evidence.js",
+    "evidence:build": "node scripts/build-evidence.js",
+    "evidence:check": "node scripts/build-evidence.js --check",
     "test": "node --test test/*.test.js",
     "test:integration": "node --test test/integration.test.js",
     "mock": "node test/fixtures/mock-server.js",

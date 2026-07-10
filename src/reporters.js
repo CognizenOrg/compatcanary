@@ -44,7 +44,7 @@ export function renderMarkdown(report) {
 export function renderText(report) {
   const width = Math.max(...report.results.map((result) => result.name.length), 18);
   const lines = [
-    "CompatCanary 0.1",
+    `CompatCanary ${VERSION}`,
     `Target: ${report.target.baseUrl}`,
     `Model:  ${report.target.model}`,
     `Profile: ${report.target.profile}`,
@@ -70,3 +70,4 @@ export function renderReport(report, format) {
   if (format === "markdown") return renderMarkdown(report);
   return renderText(report);
 }
+import { VERSION } from "./version.js";

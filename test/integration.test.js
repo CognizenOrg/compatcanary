@@ -81,3 +81,46 @@ test("a broken stream produces actionable failure evidence", async () => {
     assert.equal(shouldFail(report, "required"), true);
   });
 });
+
+test("a non-canonical streaming metadata frame produces a warning", async () => {
+  await withServer("metadata-stream", async (baseUrl) => {
+    const report = await scanEndpoint({
+      baseUrl,
+      model: "canary-model",
+      profile: "chat",
+      timeoutMs: 2_000,
+      headers: {},
+    });
+    const stream = report.results.find((result) => result.id === "chat.streaming");
+    assert.equal(stream.status, "warn");
+    assert.equal(stream.evidence.metadataEventCount, 1);
+    assert.equal(report.compatible, true);
+  });
+});
+
+test("an unavailable optional probe is a warning rather than a failure", async () => {
+  const optionalProbe = {
+    id: "optional.missing",
+    name: "Optional missing endpoint",
+    category: "Optional",
+    required: false,
+    weight: 1,
+    async run() {
+      const error = new Error("HTTP 404 from /optional");
+      error.status = 404;
+      throw error;
+    },
+  };
+  const report = await scanEndpoint(
+    {
+      baseUrl: "https://example.test/v1",
+      model: "canary-model",
+      profile: "chat",
+      timeoutMs: 20,
+      headers: {},
+    },
+    [optionalProbe],
+  );
+  assert.equal(report.results[0].status, "warn");
+  assert.equal(report.compatible, true);
+});

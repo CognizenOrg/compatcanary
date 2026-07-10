@@ -5,8 +5,9 @@ import { dirname } from "node:path";
 import { parseArgs, validateScanOptions } from "./args.js";
 import { renderReport } from "./reporters.js";
 import { scanEndpoint, shouldFail } from "./scanner.js";
+import { VERSION } from "./version.js";
 
-export const VERSION = "0.1.1";
+export { VERSION } from "./version.js";
 
 export function helpText() {
   return `CompatCanary ${VERSION}

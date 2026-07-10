@@ -81,17 +81,26 @@ export const probes = [
         stream: true,
       });
       const jsonEvents = events.filter((event) => event.json);
-      assertion(contentType.includes("text/event-stream"), "Expected text/event-stream content type");
-      assertion(jsonEvents.length > 0, "Expected at least one JSON SSE event");
-      assertion(
-        jsonEvents.every((event) => event.json?.object === "chat.completion.chunk"),
-        "Expected object=chat.completion.chunk for JSON SSE events",
+      const chunkEvents = jsonEvents.filter(
+        (event) => event.json?.object === "chat.completion.chunk",
       );
+      const metadataEvents = jsonEvents.filter(
+        (event) => event.json?.object !== "chat.completion.chunk",
+      );
+      assertion(contentType.includes("text/event-stream"), "Expected text/event-stream content type");
+      assertion(chunkEvents.length > 0, "Expected at least one chat.completion.chunk SSE event");
       assertion(events.some((event) => event.done), "Expected the [DONE] stream terminator");
       return {
-        status: "pass",
-        summary: `Received ${jsonEvents.length} valid chat stream chunks and [DONE]`,
-        evidence: { chunkCount: jsonEvents.length, done: true },
+        status: metadataEvents.length > 0 ? "warn" : "pass",
+        summary: metadataEvents.length > 0
+          ? `Received ${chunkEvents.length} chat chunks and ${metadataEvents.length} non-canonical metadata event(s)`
+          : `Received ${chunkEvents.length} valid chat stream chunks and [DONE]`,
+        evidence: {
+          chunkCount: chunkEvents.length,
+          metadataEventCount: metadataEvents.length,
+          metadataObjectTypes: [...new Set(metadataEvents.map((event) => event.json?.object ?? null))],
+          done: true,
+        },
         durationMs,
       };
     },

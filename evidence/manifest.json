@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "compatcanary.evidence-manifest.v1",
+  "entries": [
+    {
+      "slug": "github-models-openai-gpt-4-1-nano",
+      "provider": "OpenAI",
+      "implementation": "GitHub Models",
+      "implementationVersion": "hosted 2026-07-10",
+      "report": "reports/github-models-openai-gpt-4.1-nano.json",
+      "sourceUrl": "https://docs.github.com/en/rest/models/inference",
+      "submittedBy": "@guvenemre",
+      "notes": "The gateway supported basic chat, forced function calls, and strict JSON Schema output. It omitted /models and emitted one non-canonical metadata frame before normal streaming chunks."
+    },
+    {
+      "slug": "github-models-microsoft-phi-4-mini-instruct",
+      "provider": "Microsoft",
+      "implementation": "GitHub Models",
+      "implementationVersion": "hosted 2026-07-10",
+      "report": "reports/github-models-microsoft-phi-4-mini-instruct.json",
+      "sourceUrl": "https://docs.github.com/en/rest/models/inference",
+      "submittedBy": "@guvenemre",
+      "notes": "Basic and streaming chat passed. The endpoint rejected OpenAI's object-form forced tool choice and json_schema response format for this model."
+    },
+    {
+      "slug": "github-models-mistral-ministral-3b",
+      "provider": "Mistral AI",
+      "implementation": "GitHub Models",
+      "implementationVersion": "hosted 2026-07-10",
+      "report": "reports/github-models-mistral-ministral-3b.json",
+      "sourceUrl": "https://docs.github.com/en/rest/models/inference",
+      "submittedBy": "@guvenemre",
+      "notes": "Basic chat, streaming, and strict JSON Schema output passed. The endpoint rejected OpenAI's object-form forced tool choice for this model."
+    }
+  ]
+}

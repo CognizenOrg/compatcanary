@@ -1,4 +1,5 @@
 import { parseSSE } from "./sse.js";
+import { VERSION } from "./version.js";
 
 export class ProbeHttpError extends Error {
   constructor(message, details = {}) {
@@ -16,7 +17,7 @@ function requestHeaders(config, accept) {
   const headers = {
     Accept: accept,
     "Content-Type": "application/json",
-    "User-Agent": "compatcanary/0.1",
+    "User-Agent": `compatcanary/${VERSION}`,
     ...config.headers,
   };
   if (config.apiKey && !headers.Authorization && !headers.authorization) {

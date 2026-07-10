@@ -1,28 +1,15 @@
 # Public compatibility evidence
 
-This page will contain reproducible reports for public or explicitly authorized endpoints. It intentionally begins empty rather than treating documentation claims as measured behavior.
+CompatCanary publishes reproducible, timestamped observations rather than repeating compatibility claims from documentation. Every row links to the raw report and can be regenerated from the public endpoint with appropriate credentials.
 
-Each entry must include:
+| Provider | Implementation | Model | Profile | Score | Required compatibility | Scanned | Evidence |
+|---|---|---|---:|---:|---:|---:|---|
+| Microsoft | GitHub Models hosted 2026-07-10 | `microsoft/phi-4-mini-instruct` | `chat` | **41/100** | **FAIL** | 2026-07-10 | [report](evidence/pages/github-models-microsoft-phi-4-mini-instruct.md) · [JSON](evidence/reports/github-models-microsoft-phi-4-mini-instruct.json) · ![badge](evidence/badges/github-models-microsoft-phi-4-mini-instruct.svg) |
+| Mistral AI | GitHub Models hosted 2026-07-10 | `mistral-ai/ministral-3b` | `chat` | **68/100** | **FAIL** | 2026-07-10 | [report](evidence/pages/github-models-mistral-ministral-3b.md) · [JSON](evidence/reports/github-models-mistral-ministral-3b.json) · ![badge](evidence/badges/github-models-mistral-ministral-3b.svg) |
+| OpenAI | GitHub Models hosted 2026-07-10 | `openai/gpt-4.1-nano` | `chat` | **86/100** | **PASS WITH WARNINGS** | 2026-07-10 | [report](evidence/pages/github-models-openai-gpt-4-1-nano.md) · [JSON](evidence/reports/github-models-openai-gpt-4.1-nano.json) · ![badge](evidence/badges/github-models-openai-gpt-4-1-nano.svg) |
 
-- Provider or implementation and version.
-- Model ID or model family.
-- `modern` or `chat` profile.
-- Scan timestamp and CompatCanary version.
-- A redacted JSON report.
-- Reproduction notes for every failure.
+## Add an endpoint
 
-Scores expire as software and hosted endpoints change. The planned hosted index will continuously retest entries and display freshness.
+Run CompatCanary with `--format json`, review the report for sensitive data, and open a compatibility evidence issue. Accepted reports automatically produce a matrix row, detail page, machine-readable index entry, and badge.
 
-## Contributing evidence
-
-Run:
-
-```bash
-npx --yes github:CognizenOrg/compatcanary#v0.1.1 \
-  --base-url "$OPENAI_BASE_URL" \
-  --model "$OPENAI_MODEL" \
-  --format json \
-  --output compatcanary-report.json
-```
-
-Review and redact the report before opening a compatibility issue. Never publish credentials, private endpoint names, customer prompts, or sensitive response bodies.
+Scores are snapshots. Re-run a report after provider, gateway, server, or model-version changes.

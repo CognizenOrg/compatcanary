@@ -50,11 +50,15 @@ export function createMockServer({ mode = "compatible" } = {}) {
         if (mode === "broken-stream") {
           return json(response, 200, { object: "chat.completion" });
         }
-        return sse(response, [
+        const frames = [
           `data: ${JSON.stringify({ id: "chatcmpl_canary", object: "chat.completion.chunk", choices: [{ index: 0, delta: { role: "assistant", content: "CANARY" }, finish_reason: null }] })}`,
           `data: ${JSON.stringify({ id: "chatcmpl_canary", object: "chat.completion.chunk", choices: [{ index: 0, delta: { content: "_OK" }, finish_reason: "stop" }] })}`,
           "data: [DONE]",
-        ]);
+        ];
+        if (mode === "metadata-stream") {
+          frames.unshift(`data: ${JSON.stringify({ object: "", choices: [], provider_metadata: { filtered: false } })}`);
+        }
+        return sse(response, frames);
       }
 
       if (body.tools) {

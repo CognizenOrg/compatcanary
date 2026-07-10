@@ -1,0 +1,55 @@
+name: Compatibility evidence
+description: Submit a redacted CompatCanary report for the public matrix
+title: "[compatibility]: "
+labels: [compatibility]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing measured compatibility evidence. Never include API keys, private endpoints, customer prompts, or confidential response data.
+  - type: input
+    id: implementation
+    attributes:
+      label: Provider or implementation
+      placeholder: GitHub Models, LiteLLM 1.x, vLLM 0.x, or another endpoint
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model ID
+      placeholder: provider/model-name
+    validations:
+      required: true
+  - type: dropdown
+    id: profile
+    attributes:
+      label: CompatCanary profile
+      options:
+        - chat
+        - modern
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Redacted JSON report
+      description: Drag the JSON file here or paste it inside a fenced code block.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction notes
+      description: Include implementation versions and any behavior needed to reproduce failures.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Publication confirmation
+      options:
+        - label: I reviewed the complete report and authorize its publication in the CompatCanary repository.
+          required: true
+        - label: The report contains no credentials, private endpoint names, customer prompts, or confidential response bodies.
+          required: true

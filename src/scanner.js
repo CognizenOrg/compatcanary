@@ -1,4 +1,5 @@
 import { probes as defaultProbes } from "./probes.js";
+import { VERSION } from "./version.js";
 
 function cleanError(error) {
   const detail = {
@@ -61,14 +62,17 @@ export async function scanEndpoint(options, probeSet = defaultProbes) {
         ...outcome,
       });
     } catch (error) {
+      const optionalUnavailable = !probe.required && [404, 405].includes(error?.status);
       results.push({
         id: probe.id,
         name: probe.name,
         category: probe.category,
         required: probe.required,
         weight: probe.weight,
-        status: "fail",
-        summary: error?.message ?? "Probe failed",
+        status: optionalUnavailable ? "warn" : "fail",
+        summary: optionalUnavailable
+          ? `Optional capability unavailable: ${error?.message ?? "probe failed"}`
+          : error?.message ?? "Probe failed",
         error: cleanError(error),
         durationMs: error?.durationMs ?? Date.now() - probeStarted,
       });
@@ -83,7 +87,7 @@ export async function scanEndpoint(options, probeSet = defaultProbes) {
 
   return {
     schemaVersion: "compatcanary.report.v1",
-    scanner: { name: "compatcanary", version: "0.1.1" },
+    scanner: { name: "compatcanary", version: VERSION },
     target: { baseUrl: reportUrl(config.baseUrl), model: config.model, profile },
     startedAt: startedAt.toISOString(),
     completedAt: completedAt.toISOString(),
