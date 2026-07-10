@@ -1,0 +1,47 @@
+{
+  "name": "compatcanary",
+  "version": "0.1.0",
+  "description": "Evidence-first compatibility scanner for OpenAI-style APIs",
+  "type": "module",
+  "bin": {
+    "compatcanary": "./src/cli.js"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "check": "node --check src/cli.js && node --check src/action.js",
+    "test": "node --test test/*.test.js",
+    "test:integration": "node --test test/integration.test.js",
+    "mock": "node test/fixtures/mock-server.js",
+    "scan:help": "node src/cli.js --help"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "openai-compatible",
+    "api-testing",
+    "llm",
+    "conformance",
+    "github-action"
+  ],
+  "license": "MIT",
+  "files": [
+    "src",
+    "action.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "docs/REPORT-SCHEMA.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guvenemre/compatcanary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guvenemre/compatcanary/issues"
+  },
+  "homepage": "https://github.com/guvenemre/compatcanary#readme"
+}

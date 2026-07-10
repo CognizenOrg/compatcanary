@@ -1,0 +1,46 @@
+name: CompatCanary
+description: Test the observed behavior of an OpenAI-compatible API
+author: CompatCanary contributors
+branding:
+  icon: activity
+  color: yellow
+inputs:
+  base-url:
+    description: API base URL, normally ending in /v1
+    required: true
+  model:
+    description: Model ID used for live probes
+    required: true
+  profile:
+    description: Compatibility profile: modern or chat
+    required: false
+    default: modern
+  api-key:
+    description: API key for the endpoint
+    required: false
+  format:
+    description: Report format: markdown, json, or text
+    required: false
+    default: markdown
+  output:
+    description: Path to write the report
+    required: false
+    default: compatcanary-report.md
+  timeout:
+    description: Per-request timeout in seconds
+    required: false
+    default: "30"
+  fail-on:
+    description: Failure policy: required, any, or never
+    required: false
+    default: required
+outputs:
+  score:
+    description: Compatibility score from 0 to 100
+  compatible:
+    description: Whether every required probe passed
+  report:
+    description: Path to the generated report
+runs:
+  using: node20
+  main: src/action.js

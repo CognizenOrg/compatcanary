@@ -1,0 +1,48 @@
+name: Compatibility failure
+description: Report observed behavior from an OpenAI-compatible endpoint
+title: "[compatibility]: "
+labels: [compatibility]
+body:
+  - type: markdown
+    attributes:
+      value: Never include API keys, credentials, private prompts, or sensitive response bodies.
+  - type: input
+    id: provider
+    attributes:
+      label: Provider or implementation
+      placeholder: vLLM, LiteLLM, local gateway, hosted provider, etc.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or deployment identifier
+    validations:
+      required: false
+  - type: input
+    id: model
+    attributes:
+      label: Model ID
+    validations:
+      required: true
+  - type: dropdown
+    id: probe
+    attributes:
+      label: Failing probe
+      options:
+        - Model discovery
+        - Chat Completions
+        - Chat streaming
+        - Forced tool call
+        - Strict structured output
+        - Responses API
+        - Responses streaming
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Redacted CompatCanary output
+      render: shell
+    validations:
+      required: true
