@@ -4,7 +4,7 @@
   "description": "Evidence-first compatibility scanner for OpenAI-style APIs",
   "type": "module",
   "bin": {
-    "compatcanary": "./src/cli.js"
+    "compatcanary": "src/cli.js"
   },
   "exports": {
     ".": "./src/index.js"
