@@ -31,7 +31,7 @@ The default `modern` profile covers Chat Completions plus the Responses API. Use
 Requires Node.js 20 or newer.
 
 ```bash
-npx --yes github:guvenemre/compatcanary#v0.1.0 scan \
+npx --yes github:CognizenOrg/compatcanary#v0.1.0 scan \
   --base-url https://your-provider.example/v1 \
   --model your-model
 ```
@@ -42,7 +42,7 @@ For an authenticated endpoint:
 
 ```bash
 export OPENAI_API_KEY='your-key'
-npx --yes github:guvenemre/compatcanary#v0.1.0 scan \
+npx --yes github:CognizenOrg/compatcanary#v0.1.0 scan \
   --base-url https://your-provider.example/v1 \
   --model your-model
 ```
@@ -53,7 +53,7 @@ Or use the conventional environment variables:
 export OPENAI_BASE_URL='https://your-provider.example/v1'
 export OPENAI_MODEL='your-model'
 export OPENAI_API_KEY='your-key'
-npx --yes github:guvenemre/compatcanary#v0.1.0
+npx --yes github:CognizenOrg/compatcanary#v0.1.0
 ```
 
 CompatCanary does not require an API key for endpoints that do not require authentication.
@@ -61,7 +61,7 @@ CompatCanary does not require an API key for endpoints that do not require authe
 Chat-only implementations can select the narrower profile:
 
 ```bash
-npx --yes github:guvenemre/compatcanary#v0.1.0 scan \
+npx --yes github:CognizenOrg/compatcanary#v0.1.0 scan \
   --base-url https://your-provider.example/v1 \
   --model your-model \
   --profile chat
@@ -84,7 +84,7 @@ Required compatibility: FAIL
 Generate evidence for a pull request or issue:
 
 ```bash
-npx --yes github:guvenemre/compatcanary#v0.1.0 \
+npx --yes github:CognizenOrg/compatcanary#v0.1.0 \
   --base-url "$OPENAI_BASE_URL" \
   --model "$OPENAI_MODEL" \
   --format markdown \
@@ -94,7 +94,7 @@ npx --yes github:guvenemre/compatcanary#v0.1.0 \
 JSON output follows the versioned schema `compatcanary.report.v1`:
 
 ```bash
-npx --yes github:guvenemre/compatcanary#v0.1.0 \
+npx --yes github:CognizenOrg/compatcanary#v0.1.0 \
   --base-url "$OPENAI_BASE_URL" \
   --model "$OPENAI_MODEL" \
   --format json \
@@ -118,7 +118,7 @@ jobs:
   compatcanary:
     runs-on: ubuntu-latest
     steps:
-      - uses: guvenemre/compatcanary@v0.1.0
+      - uses: CognizenOrg/compatcanary@v0.1.0
         id: canary
         with:
           base-url: ${{ vars.OPENAI_BASE_URL }}
@@ -141,7 +141,7 @@ The action outputs `score`, `compatible`, and `report`.
 Bearer authentication is added automatically when a key is supplied. Additional headers can be repeated:
 
 ```bash
-npx --yes github:guvenemre/compatcanary#v0.1.0 \
+npx --yes github:CognizenOrg/compatcanary#v0.1.0 \
   --base-url https://gateway.example/v1 \
   --model deployed-model \
   --header 'X-Tenant: acme' \

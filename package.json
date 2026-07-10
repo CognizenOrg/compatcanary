@@ -38,10 +38,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guvenemre/compatcanary.git"
+    "url": "git+https://github.com/CognizenOrg/compatcanary.git"
   },
   "bugs": {
-    "url": "https://github.com/guvenemre/compatcanary/issues"
+    "url": "https://github.com/CognizenOrg/compatcanary/issues"
   },
-  "homepage": "https://github.com/guvenemre/compatcanary#readme"
+  "homepage": "https://github.com/CognizenOrg/compatcanary#readme"
 }
