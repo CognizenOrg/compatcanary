@@ -1,6 +1,6 @@
 {
   "name": "compatcanary",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Evidence-first compatibility scanner for OpenAI-style APIs",
   "type": "module",
   "bin": {

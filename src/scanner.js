@@ -83,7 +83,7 @@ export async function scanEndpoint(options, probeSet = defaultProbes) {
 
   return {
     schemaVersion: "compatcanary.report.v1",
-    scanner: { name: "compatcanary", version: "0.1.0" },
+    scanner: { name: "compatcanary", version: "0.1.1" },
     target: { baseUrl: reportUrl(config.baseUrl), model: config.model, profile },
     startedAt: startedAt.toISOString(),
     completedAt: completedAt.toISOString(),

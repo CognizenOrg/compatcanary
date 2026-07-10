@@ -6,7 +6,7 @@ import { parseArgs, validateScanOptions } from "./args.js";
 import { renderReport } from "./reporters.js";
 import { scanEndpoint, shouldFail } from "./scanner.js";
 
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 
 export function helpText() {
   return `CompatCanary ${VERSION}
