@@ -1,6 +1,6 @@
-# Microsoft: microsoft/phi-4-mini-instruct
+# Cohere: cohere/cohere-command-a
 
-![Microsoft compatibility badge](../badges/github-models-microsoft-phi-4-mini-instruct.svg)
+![Cohere compatibility badge](../badges/github-models-cohere-command-a.svg)
 
 - **Implementation:** GitHub Models hosted 2026-07-10
 - **Endpoint:** `https://models.github.ai/inference`
@@ -9,9 +9,9 @@
 - **Submitted by:** @guvenemre
 - **Provider documentation:** https://docs.github.com/en/rest/models/inference
 
-- **Verdict:** **FAIL**, 41/100
+- **Verdict:** **PASS WITH WARNINGS**, 95/100
 
-Basic and streaming chat passed. The endpoint rejected OpenAI's object-form forced tool choice and json_schema response format for this model.
+All required Chat-profile probes passed. The GitHub Models inference base URL did not expose the optional /models route.
 
 ## Observed behavior
 
@@ -19,17 +19,17 @@ Basic and streaming chat passed. The endpoint rejected OpenAI's object-form forc
 |---|---:|---:|---|
 | Model discovery | no | **WARN** | Optional capability unavailable: HTTP 404 from /models |
 | Chat Completions | yes | **PASS** | Returned a structurally valid chat completion |
-| Chat streaming | yes | **PASS** | Received 6 valid chat stream chunks and [DONE] |
-| Forced tool call | yes | **FAIL** | HTTP 422 from /chat/completions |
-| Strict structured output | yes | **FAIL** | HTTP 422 from /chat/completions |
+| Chat streaming | yes | **PASS** | Received 8 valid chat stream chunks and [DONE] |
+| Forced tool call | yes | **PASS** | Returned a forced function call with parseable JSON arguments |
+| Strict structured output | yes | **PASS** | Returned JSON satisfying a strict schema |
 
 ## Reproduce
 
 ```sh
 npx compatcanary scan --base-url https://models.github.ai/inference \
-  --model microsoft/phi-4-mini-instruct --profile chat
+  --model cohere/cohere-command-a --profile chat
 ```
 
-The complete machine-readable evidence is in [the raw report](../reports/github-models-microsoft-phi-4-mini-instruct.json).
+The complete machine-readable evidence is in [the raw report](../reports/github-models-cohere-command-a.json).
 
 _This records observed behavior at one point in time. It is not an official certification, security audit, or guarantee of future behavior._

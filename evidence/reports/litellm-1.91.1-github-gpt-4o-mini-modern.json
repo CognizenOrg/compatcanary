@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "compatcanary.report.v1",
+  "scanner": {
+    "name": "compatcanary",
+    "version": "0.2.0"
+  },
+  "target": {
+    "baseUrl": "http://127.0.0.1:4001/v1",
+    "model": "github-gpt-4o-mini",
+    "profile": "modern"
+  },
+  "startedAt": "2026-07-10T22:16:07.559Z",
+  "completedAt": "2026-07-10T22:16:11.291Z",
+  "durationMs": 3732,
+  "score": 65,
+  "compatible": false,
+  "summary": {
+    "passes": 5,
+    "warnings": 0,
+    "failures": 2,
+    "requiredFailures": 2,
+    "total": 7
+  },
+  "results": [
+    {
+      "id": "models.list",
+      "name": "Model discovery",
+      "category": "Discovery",
+      "required": false,
+      "weight": 0.5,
+      "status": "pass",
+      "summary": "Discovered 1 models; selected model is listed",
+      "evidence": {
+        "modelCount": 1,
+        "selectedModelListed": true
+      },
+      "durationMs": 24
+    },
+    {
+      "id": "chat.basic",
+      "name": "Chat Completions",
+      "category": "Chat",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Returned a structurally valid chat completion",
+      "evidence": {
+        "object": "chat.completion",
+        "finishReason": "stop"
+      },
+      "durationMs": 1080
+    },
+    {
+      "id": "chat.streaming",
+      "name": "Chat streaming",
+      "category": "Streaming",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Received 5 valid chat stream chunks and [DONE]",
+      "evidence": {
+        "chunkCount": 5,
+        "metadataEventCount": 0,
+        "metadataObjectTypes": [],
+        "done": true
+      },
+      "durationMs": 775
+    },
+    {
+      "id": "chat.tool_call",
+      "name": "Forced tool call",
+      "category": "Tools",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Returned a forced function call with parseable JSON arguments",
+      "evidence": {
+        "toolName": "compatcanary_echo",
+        "argumentsValidJson": true
+      },
+      "durationMs": 782
+    },
+    {
+      "id": "chat.structured_output",
+      "name": "Strict structured output",
+      "category": "Structured output",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Returned JSON satisfying a strict schema",
+      "evidence": {
+        "schemaSatisfied": true
+      },
+      "durationMs": 869
+    },
+    {
+      "id": "responses.basic",
+      "name": "Responses API",
+      "category": "Responses",
+      "required": true,
+      "weight": 1.5,
+      "status": "fail",
+      "summary": "HTTP 404 from /responses",
+      "error": {
+        "message": "HTTP 404 from /responses",
+        "httpStatus": 404,
+        "responseBody": "{\"error\":{\"message\":\"litellm.NotFoundError: NotFoundError: OpenAIException - 404 page not found\\n. Received Model Group=github-gpt-4o-mini\\nAvailable Model Group Fallbacks=None\",\"type\":null,\"param\":null,\"code\":\"404\"}}"
+      },
+      "durationMs": 191
+    },
+    {
+      "id": "responses.streaming",
+      "name": "Responses streaming",
+      "category": "Responses",
+      "required": true,
+      "weight": 1.5,
+      "status": "fail",
+      "summary": "HTTP 429 from /responses",
+      "error": {
+        "message": "HTTP 429 from /responses",
+        "httpStatus": 429,
+        "responseBody": "{\"error\":{\"message\":\"No deployments available for selected model, Try again in 5 seconds. Passed model=github-gpt-4o-mini. pre-call-checks=False, cooldown_list=['b4411ef774cf3cd18669762ed42f4f78d9ca5a677024c1355e4187ed014973a5']\",\"type\":\"None\",\"param\":\"None\",\"code\":\"429\"}}"
+      },
+      "durationMs": 9
+    }
+  ]
+}

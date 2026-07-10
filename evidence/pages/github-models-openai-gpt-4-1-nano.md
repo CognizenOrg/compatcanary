@@ -8,6 +8,7 @@
 - **Scanned:** 2026-07-10 with CompatCanary 0.2.0
 - **Submitted by:** @guvenemre
 - **Provider documentation:** https://docs.github.com/en/rest/models/inference
+
 - **Verdict:** **PASS WITH WARNINGS**, 86/100
 
 The gateway supported basic chat, forced function calls, and strict JSON Schema output. It omitted /models and emitted one non-canonical metadata frame before normal streaming chunks.

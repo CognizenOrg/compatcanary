@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "compatcanary.report.v1",
+  "scanner": {
+    "name": "compatcanary",
+    "version": "0.2.0"
+  },
+  "target": {
+    "baseUrl": "https://models.github.ai/inference",
+    "model": "mistral-ai/codestral-2501",
+    "profile": "chat"
+  },
+  "startedAt": "2026-07-10T22:08:52.295Z",
+  "completedAt": "2026-07-10T22:08:55.979Z",
+  "durationMs": 3684,
+  "score": 68,
+  "compatible": false,
+  "summary": {
+    "passes": 3,
+    "warnings": 1,
+    "failures": 1,
+    "requiredFailures": 1,
+    "total": 5
+  },
+  "results": [
+    {
+      "id": "models.list",
+      "name": "Model discovery",
+      "category": "Discovery",
+      "required": false,
+      "weight": 0.5,
+      "status": "warn",
+      "summary": "Optional capability unavailable: HTTP 404 from /models",
+      "error": {
+        "message": "HTTP 404 from /models",
+        "httpStatus": 404,
+        "responseBody": "404 page not found\n"
+      },
+      "durationMs": 581
+    },
+    {
+      "id": "chat.basic",
+      "name": "Chat Completions",
+      "category": "Chat",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Returned a structurally valid chat completion",
+      "evidence": {
+        "object": "chat.completion",
+        "finishReason": "stop"
+      },
+      "durationMs": 930
+    },
+    {
+      "id": "chat.streaming",
+      "name": "Chat streaming",
+      "category": "Streaming",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Received 6 valid chat stream chunks and [DONE]",
+      "evidence": {
+        "chunkCount": 6,
+        "metadataEventCount": 0,
+        "metadataObjectTypes": [],
+        "done": true
+      },
+      "durationMs": 1132
+    },
+    {
+      "id": "chat.tool_call",
+      "name": "Forced tool call",
+      "category": "Tools",
+      "required": true,
+      "weight": 1.5,
+      "status": "fail",
+      "summary": "HTTP 422 from /chat/completions",
+      "error": {
+        "message": "HTTP 422 from /chat/completions",
+        "httpStatus": 422,
+        "responseBody": "{\"error\":{\"code\":\"Invalid input\",\"status\":422,\"message\":\"invalid input error\",\"details\":[{\"type\":\"string_type\",\"loc\":[\"body\",\"tool_choice\"],\"msg\":\"Input should be a valid string\",\"input\":{\"function\":{\"name\":\"compatcanary_echo\"},\"type\":\"function\"}}]}}"
+      },
+      "durationMs": 375
+    },
+    {
+      "id": "chat.structured_output",
+      "name": "Strict structured output",
+      "category": "Structured output",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Returned JSON satisfying a strict schema",
+      "evidence": {
+        "schemaSatisfied": true
+      },
+      "durationMs": 664
+    }
+  ]
+}

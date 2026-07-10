@@ -36,9 +36,13 @@ function suspiciousSecret(value) {
   ].some((pattern) => pattern.test(text));
 }
 
-function validatePublicUrl(value, field) {
+function validatePublicUrl(value, field, { allowLoopbackHttp = false } = {}) {
   const url = new URL(requiredString(value, field));
-  invariant(url.protocol === "https:", `${field} must use HTTPS`);
+  const loopback = ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
+  invariant(
+    url.protocol === "https:" || (allowLoopbackHttp && url.protocol === "http:" && loopback),
+    `${field} must use HTTPS${allowLoopbackHttp ? " or loopback HTTP" : ""}`,
+  );
   invariant(!url.username && !url.password, `${field} must not contain credentials`);
   invariant(!url.search && !url.hash, `${field} must not contain a query string or fragment`);
   return url.toString().replace(/\/$/, "");
@@ -49,7 +53,7 @@ export function validateReport(report, reportPath = "report") {
   invariant(report.schemaVersion === REPORT_SCHEMA, `${reportPath} must use ${REPORT_SCHEMA}`);
   invariant(report.scanner?.name === "compatcanary", `${reportPath} must be produced by CompatCanary`);
   requiredString(report.scanner?.version, `${reportPath}.scanner.version`);
-  validatePublicUrl(report.target?.baseUrl, `${reportPath}.target.baseUrl`);
+  validatePublicUrl(report.target?.baseUrl, `${reportPath}.target.baseUrl`, { allowLoopbackHttp: true });
   requiredString(report.target?.model, `${reportPath}.target.model`);
   invariant(["modern", "chat"].includes(report.target?.profile), `${reportPath}.target.profile is invalid`);
   invariant(Number.isInteger(report.score) && report.score >= 0 && report.score <= 100, `${reportPath}.score must be an integer from 0 to 100`);
@@ -90,6 +94,11 @@ export function validateManifest(manifest) {
     invariant(!reports.has(report), `${prefix}.report duplicates ${report}`);
     reports.add(report);
     validatePublicUrl(entry?.sourceUrl, `${prefix}.sourceUrl`);
+    if (entry.setup !== undefined) {
+      const setup = requiredString(entry.setup, `${prefix}.setup`);
+      invariant(!setup.includes(".."), `${prefix}.setup must not traverse directories`);
+      invariant(/^setups\/[a-z0-9][a-z0-9._/-]*\.md$/.test(setup), `${prefix}.setup must be under setups/`);
+    }
     if (entry.notes !== undefined) requiredString(entry.notes, `${prefix}.notes`);
   }
   return manifest;
@@ -141,6 +150,7 @@ export function renderEvidencePage(entry, report) {
     `- **Scanned:** ${completed} with CompatCanary ${markdown(report.scanner.version)}`,
     `- **Submitted by:** ${markdown(entry.submittedBy)}`,
     `- **Provider documentation:** ${entry.sourceUrl}`,
+    entry.setup ? `- **Setup:** [reproduction configuration](../${entry.setup})` : "",
     `- **Verdict:** **${statusLabel(report)}**, ${report.score}/100`,
     "",
     entry.notes ? `${markdown(entry.notes)}` : "",
@@ -210,6 +220,7 @@ export function buildEvidenceArtifacts(manifest, reportsByPath) {
       page: `pages/${entry.slug}.md`,
       badge: `badges/${entry.slug}.svg`,
       sourceUrl: entry.sourceUrl,
+      ...(entry.setup ? { setup: entry.setup } : {}),
     });
   }
   matrix.push(

@@ -126,7 +126,7 @@ jobs:
   compatcanary:
     runs-on: ubuntu-latest
     steps:
-      - uses: CognizenOrg/compatcanary@v0.2.0
+      - uses: CognizenOrg/compatcanary@v0.2.1
         id: canary
         with:
           base-url: ${{ vars.OPENAI_BASE_URL }}

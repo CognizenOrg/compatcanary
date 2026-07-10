@@ -2,6 +2,14 @@
 
 All notable changes to CompatCanary will be documented here.
 
+## 0.2.1 — 2026-07-11
+
+- Expanded the public matrix from three to eleven live reports.
+- Added reproducible LiteLLM 1.91.1 and LocalAI 4.6.2 setup guides and runtime reports.
+- Added five more GitHub Models reports across Cohere, Microsoft, Mistral AI, and OpenAI models.
+- Allowed public evidence for loopback HTTP endpoints while continuing to require HTTPS for remote endpoints and source links.
+- Added optional setup links to generated evidence pages and the machine-readable index.
+
 ## 0.2.0 — 2026-07-10
 
 - Added a generated public compatibility matrix, provider/model detail pages, SVG badges, and a machine-readable evidence index.

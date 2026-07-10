@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "compatcanary.report.v1",
+  "scanner": {
+    "name": "compatcanary",
+    "version": "0.2.0"
+  },
+  "target": {
+    "baseUrl": "http://127.0.0.1:8082/v1",
+    "model": "llama-3.2-1b-instruct:q4_k_m",
+    "profile": "modern"
+  },
+  "startedAt": "2026-07-10T22:24:52.880Z",
+  "completedAt": "2026-07-10T22:24:55.511Z",
+  "durationMs": 2631,
+  "score": 82,
+  "compatible": false,
+  "summary": {
+    "passes": 6,
+    "warnings": 0,
+    "failures": 1,
+    "requiredFailures": 1,
+    "total": 7
+  },
+  "results": [
+    {
+      "id": "models.list",
+      "name": "Model discovery",
+      "category": "Discovery",
+      "required": false,
+      "weight": 0.5,
+      "status": "pass",
+      "summary": "Discovered 1 models; selected model is listed",
+      "evidence": {
+        "modelCount": 1,
+        "selectedModelListed": true
+      },
+      "durationMs": 24
+    },
+    {
+      "id": "chat.basic",
+      "name": "Chat Completions",
+      "category": "Chat",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Returned a structurally valid chat completion",
+      "evidence": {
+        "object": "chat.completion",
+        "finishReason": "stop"
+      },
+      "durationMs": 243
+    },
+    {
+      "id": "chat.streaming",
+      "name": "Chat streaming",
+      "category": "Streaming",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Received 7 valid chat stream chunks and [DONE]",
+      "evidence": {
+        "chunkCount": 7,
+        "metadataEventCount": 0,
+        "metadataObjectTypes": [],
+        "done": true
+      },
+      "durationMs": 208
+    },
+    {
+      "id": "chat.tool_call",
+      "name": "Forced tool call",
+      "category": "Tools",
+      "required": true,
+      "weight": 1.5,
+      "status": "fail",
+      "summary": "Expected a function tool call",
+      "error": {
+        "message": "Expected a function tool call"
+      },
+      "durationMs": 1264
+    },
+    {
+      "id": "chat.structured_output",
+      "name": "Strict structured output",
+      "category": "Structured output",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Returned JSON satisfying a strict schema",
+      "evidence": {
+        "schemaSatisfied": true
+      },
+      "durationMs": 446
+    },
+    {
+      "id": "responses.basic",
+      "name": "Responses API",
+      "category": "Responses",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Returned a structurally valid Responses API object",
+      "evidence": {
+        "object": "response",
+        "status": "completed"
+      },
+      "durationMs": 239
+    },
+    {
+      "id": "responses.streaming",
+      "name": "Responses streaming",
+      "category": "Responses",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Received 12 typed response stream events",
+      "evidence": {
+        "eventCount": 12,
+        "eventTypes": [
+          "response.created",
+          "response.in_progress",
+          "response.output_item.added",
+          "response.content_part.added",
+          "response.output_text.delta",
+          "response.output_text.done",
+          "response.content_part.done",
+          "response.output_item.done",
+          "response.completed",
+          "message"
+        ]
+      },
+      "durationMs": 204
+    }
+  ]
+}

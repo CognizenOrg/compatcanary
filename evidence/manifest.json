@@ -30,6 +30,89 @@
       "sourceUrl": "https://docs.github.com/en/rest/models/inference",
       "submittedBy": "@guvenemre",
       "notes": "Basic chat, streaming, and strict JSON Schema output passed. The endpoint rejected OpenAI's object-form forced tool choice for this model."
+    },
+    {
+      "slug": "github-models-cohere-command-a",
+      "provider": "Cohere",
+      "implementation": "GitHub Models",
+      "implementationVersion": "hosted 2026-07-10",
+      "report": "reports/github-models-cohere-command-a.json",
+      "sourceUrl": "https://docs.github.com/en/rest/models/inference",
+      "submittedBy": "@guvenemre",
+      "notes": "All required Chat-profile probes passed. The GitHub Models inference base URL did not expose the optional /models route."
+    },
+    {
+      "slug": "github-models-microsoft-phi-4-multimodal-instruct",
+      "provider": "Microsoft",
+      "implementation": "GitHub Models",
+      "implementationVersion": "hosted 2026-07-10",
+      "report": "reports/github-models-microsoft-phi-4-multimodal-instruct.json",
+      "sourceUrl": "https://docs.github.com/en/rest/models/inference",
+      "submittedBy": "@guvenemre",
+      "notes": "Basic chat, streaming, and strict JSON Schema output passed. The endpoint rejected OpenAI's object-form forced tool choice for this model."
+    },
+    {
+      "slug": "github-models-mistral-codestral-2501",
+      "provider": "Mistral AI",
+      "implementation": "GitHub Models",
+      "implementationVersion": "hosted 2026-07-10",
+      "report": "reports/github-models-mistral-codestral-2501.json",
+      "sourceUrl": "https://docs.github.com/en/rest/models/inference",
+      "submittedBy": "@guvenemre",
+      "notes": "Basic chat, streaming, and strict JSON Schema output passed. The endpoint rejected OpenAI's object-form forced tool choice for this model."
+    },
+    {
+      "slug": "github-models-mistral-small-2503",
+      "provider": "Mistral AI",
+      "implementation": "GitHub Models",
+      "implementationVersion": "hosted 2026-07-10",
+      "report": "reports/github-models-mistral-small-2503.json",
+      "sourceUrl": "https://docs.github.com/en/rest/models/inference",
+      "submittedBy": "@guvenemre",
+      "notes": "Basic and streaming chat passed. The endpoint required string-form tool_choice and supported json_object rather than OpenAI's strict json_schema response format for this model."
+    },
+    {
+      "slug": "github-models-openai-gpt-4o-mini",
+      "provider": "OpenAI",
+      "implementation": "GitHub Models",
+      "implementationVersion": "hosted 2026-07-10",
+      "report": "reports/github-models-openai-gpt-4o-mini.json",
+      "sourceUrl": "https://docs.github.com/en/rest/models/inference",
+      "submittedBy": "@guvenemre",
+      "notes": "All required Chat-profile capabilities passed. The gateway omitted /models and emitted one non-canonical metadata frame before normal streaming chunks."
+    },
+    {
+      "slug": "litellm-1-91-1-github-gpt-4o-mini-chat",
+      "provider": "LiteLLM",
+      "implementation": "LiteLLM Proxy + GitHub Models",
+      "implementationVersion": "1.91.1",
+      "report": "reports/litellm-1.91.1-github-gpt-4o-mini-chat.json",
+      "sourceUrl": "https://github.com/BerriAI/litellm/releases/tag/v1.91.1",
+      "setup": "setups/litellm-1.91.1-github-models.md",
+      "submittedBy": "@guvenemre",
+      "notes": "LiteLLM normalized GitHub Models into a 100/100 Chat-profile endpoint, including model discovery, canonical streaming, forced tool calls, and strict JSON Schema output."
+    },
+    {
+      "slug": "litellm-1-91-1-github-gpt-4o-mini-modern",
+      "provider": "LiteLLM",
+      "implementation": "LiteLLM Proxy + GitHub Models",
+      "implementationVersion": "1.91.1",
+      "report": "reports/litellm-1.91.1-github-gpt-4o-mini-modern.json",
+      "sourceUrl": "https://github.com/BerriAI/litellm/releases/tag/v1.91.1",
+      "setup": "setups/litellm-1.91.1-github-models.md",
+      "submittedBy": "@guvenemre",
+      "notes": "The same configuration passed every Chat probe but failed both Modern-profile Responses probes because the configured GitHub Models backend did not expose /responses."
+    },
+    {
+      "slug": "localai-4-6-2-llama-3-2-1b-modern",
+      "provider": "LocalAI",
+      "implementation": "LocalAI CPU + llama.cpp",
+      "implementationVersion": "4.6.2",
+      "report": "reports/localai-4.6.2-llama-3.2-1b-modern.json",
+      "sourceUrl": "https://github.com/mudler/LocalAI/releases/tag/v4.6.2",
+      "setup": "setups/localai-4.6.2-llama-3.2-1b.md",
+      "submittedBy": "@guvenemre",
+      "notes": "Model discovery, chat, streaming, strict JSON Schema output, Responses, and Responses streaming passed. The selected 1B model did not produce the forced function call."
     }
   ]
 }

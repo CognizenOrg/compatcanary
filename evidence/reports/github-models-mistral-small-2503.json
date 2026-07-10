@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "compatcanary.report.v1",
+  "scanner": {
+    "name": "compatcanary",
+    "version": "0.2.0"
+  },
+  "target": {
+    "baseUrl": "https://models.github.ai/inference",
+    "model": "mistral-ai/mistral-small-2503",
+    "profile": "chat"
+  },
+  "startedAt": "2026-07-10T22:08:49.228Z",
+  "completedAt": "2026-07-10T22:08:52.196Z",
+  "durationMs": 2968,
+  "score": 41,
+  "compatible": false,
+  "summary": {
+    "passes": 2,
+    "warnings": 1,
+    "failures": 2,
+    "requiredFailures": 2,
+    "total": 5
+  },
+  "results": [
+    {
+      "id": "models.list",
+      "name": "Model discovery",
+      "category": "Discovery",
+      "required": false,
+      "weight": 0.5,
+      "status": "warn",
+      "summary": "Optional capability unavailable: HTTP 404 from /models",
+      "error": {
+        "message": "HTTP 404 from /models",
+        "httpStatus": 404,
+        "responseBody": "404 page not found\n"
+      },
+      "durationMs": 489
+    },
+    {
+      "id": "chat.basic",
+      "name": "Chat Completions",
+      "category": "Chat",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Returned a structurally valid chat completion",
+      "evidence": {
+        "object": "chat.completion",
+        "finishReason": "stop"
+      },
+      "durationMs": 1208
+    },
+    {
+      "id": "chat.streaming",
+      "name": "Chat streaming",
+      "category": "Streaming",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Received 6 valid chat stream chunks and [DONE]",
+      "evidence": {
+        "chunkCount": 6,
+        "metadataEventCount": 0,
+        "metadataObjectTypes": [],
+        "done": true
+      },
+      "durationMs": 382
+    },
+    {
+      "id": "chat.tool_call",
+      "name": "Forced tool call",
+      "category": "Tools",
+      "required": true,
+      "weight": 1.5,
+      "status": "fail",
+      "summary": "HTTP 400 from /chat/completions",
+      "error": {
+        "message": "HTTP 400 from /chat/completions",
+        "httpStatus": 400,
+        "responseBody": "{\"error\":{\"code\":\"unsupported_request_value\",\"message\":\"Model does not support request parameter value supplied: 'tool_choice' must be a string.\",\"details\":\"Model does not support request parameter value supplied: 'tool_choice' must be a string.\"}}"
+      },
+      "durationMs": 195
+    },
+    {
+      "id": "chat.structured_output",
+      "name": "Strict structured output",
+      "category": "Structured output",
+      "required": true,
+      "weight": 1.5,
+      "status": "fail",
+      "summary": "HTTP 422 from /chat/completions",
+      "error": {
+        "message": "HTTP 422 from /chat/completions",
+        "httpStatus": 422,
+        "responseBody": "{\"error\":{\"code\":\"Invalid input\",\"status\":422,\"message\":\"invalid input error\",\"details\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"response_format\",\"type\"],\"msg\":\"Value error, Response format was json_schema but must be either 'text' or 'json_object'.\",\"input\":\"json_schema\",\"ctx\":{\"error\":{}}}]}}"
+      },
+      "durationMs": 692
+    }
+  ]
+}

@@ -1,6 +1,6 @@
-# Microsoft: microsoft/phi-4-mini-instruct
+# Mistral AI: mistral-ai/mistral-small-2503
 
-![Microsoft compatibility badge](../badges/github-models-microsoft-phi-4-mini-instruct.svg)
+![Mistral AI compatibility badge](../badges/github-models-mistral-small-2503.svg)
 
 - **Implementation:** GitHub Models hosted 2026-07-10
 - **Endpoint:** `https://models.github.ai/inference`
@@ -11,7 +11,7 @@
 
 - **Verdict:** **FAIL**, 41/100
 
-Basic and streaming chat passed. The endpoint rejected OpenAI's object-form forced tool choice and json_schema response format for this model.
+Basic and streaming chat passed. The endpoint required string-form tool_choice and supported json_object rather than OpenAI's strict json_schema response format for this model.
 
 ## Observed behavior
 
@@ -20,16 +20,16 @@ Basic and streaming chat passed. The endpoint rejected OpenAI's object-form forc
 | Model discovery | no | **WARN** | Optional capability unavailable: HTTP 404 from /models |
 | Chat Completions | yes | **PASS** | Returned a structurally valid chat completion |
 | Chat streaming | yes | **PASS** | Received 6 valid chat stream chunks and [DONE] |
-| Forced tool call | yes | **FAIL** | HTTP 422 from /chat/completions |
+| Forced tool call | yes | **FAIL** | HTTP 400 from /chat/completions |
 | Strict structured output | yes | **FAIL** | HTTP 422 from /chat/completions |
 
 ## Reproduce
 
 ```sh
 npx compatcanary scan --base-url https://models.github.ai/inference \
-  --model microsoft/phi-4-mini-instruct --profile chat
+  --model mistral-ai/mistral-small-2503 --profile chat
 ```
 
-The complete machine-readable evidence is in [the raw report](../reports/github-models-microsoft-phi-4-mini-instruct.json).
+The complete machine-readable evidence is in [the raw report](../reports/github-models-mistral-small-2503.json).
 
 _This records observed behavior at one point in time. It is not an official certification, security audit, or guarantee of future behavior._

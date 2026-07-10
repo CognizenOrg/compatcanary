@@ -8,6 +8,7 @@
 - **Scanned:** 2026-07-10 with CompatCanary 0.2.0
 - **Submitted by:** @guvenemre
 - **Provider documentation:** https://docs.github.com/en/rest/models/inference
+
 - **Verdict:** **FAIL**, 68/100
 
 Basic chat, streaming, and strict JSON Schema output passed. The endpoint rejected OpenAI's object-form forced tool choice for this model.

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "compatcanary.report.v1",
+  "scanner": {
+    "name": "compatcanary",
+    "version": "0.2.0"
+  },
+  "target": {
+    "baseUrl": "https://models.github.ai/inference",
+    "model": "cohere/cohere-command-a",
+    "profile": "chat"
+  },
+  "startedAt": "2026-07-10T22:09:00.993Z",
+  "completedAt": "2026-07-10T22:09:05.595Z",
+  "durationMs": 4602,
+  "score": 95,
+  "compatible": true,
+  "summary": {
+    "passes": 4,
+    "warnings": 1,
+    "failures": 0,
+    "requiredFailures": 0,
+    "total": 5
+  },
+  "results": [
+    {
+      "id": "models.list",
+      "name": "Model discovery",
+      "category": "Discovery",
+      "required": false,
+      "weight": 0.5,
+      "status": "warn",
+      "summary": "Optional capability unavailable: HTTP 404 from /models",
+      "error": {
+        "message": "HTTP 404 from /models",
+        "httpStatus": 404,
+        "responseBody": "404 page not found\n"
+      },
+      "durationMs": 519
+    },
+    {
+      "id": "chat.basic",
+      "name": "Chat Completions",
+      "category": "Chat",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Returned a structurally valid chat completion",
+      "evidence": {
+        "object": "chat.completion",
+        "finishReason": "stop"
+      },
+      "durationMs": 1142
+    },
+    {
+      "id": "chat.streaming",
+      "name": "Chat streaming",
+      "category": "Streaming",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Received 8 valid chat stream chunks and [DONE]",
+      "evidence": {
+        "chunkCount": 8,
+        "metadataEventCount": 0,
+        "metadataObjectTypes": [],
+        "done": true
+      },
+      "durationMs": 887
+    },
+    {
+      "id": "chat.tool_call",
+      "name": "Forced tool call",
+      "category": "Tools",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Returned a forced function call with parseable JSON arguments",
+      "evidence": {
+        "toolName": "compatcanary_echo",
+        "argumentsValidJson": true
+      },
+      "durationMs": 1503
+    },
+    {
+      "id": "chat.structured_output",
+      "name": "Strict structured output",
+      "category": "Structured output",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Returned JSON satisfying a strict schema",
+      "evidence": {
+        "schemaSatisfied": true
+      },
+      "durationMs": 548
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import {
 function sampleReport(overrides = {}) {
   return {
     schemaVersion: "compatcanary.report.v1",
-    scanner: { name: "compatcanary", version: "0.2.0" },
+    scanner: { name: "compatcanary", version: "0.2.1" },
     target: {
       baseUrl: "https://example.test/v1",
       model: "example-model",
@@ -77,10 +77,24 @@ test("evidence reports reject credentials and private URL components", () => {
   );
 });
 
+test("evidence reports allow loopback HTTP but reject remote HTTP", () => {
+  assert.doesNotThrow(() => validateReport(sampleReport({
+    target: { baseUrl: "http://127.0.0.1:4000/v1", model: "example", profile: "chat" },
+  })));
+  assert.throws(
+    () => validateReport(sampleReport({ target: { baseUrl: "http://example.test/v1", model: "example", profile: "chat" } })),
+    /HTTPS or loopback HTTP/,
+  );
+});
+
 test("evidence manifests reject path traversal", () => {
   assert.throws(
     () => validateManifest(sampleManifest({ report: "reports/../private.json" })),
     /must not traverse directories/,
+  );
+  assert.throws(
+    () => validateManifest(sampleManifest({ setup: "setups/../private.md" })),
+    /setup must not traverse directories/,
   );
 });
 
