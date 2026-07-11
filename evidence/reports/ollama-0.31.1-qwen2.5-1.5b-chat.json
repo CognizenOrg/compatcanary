@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "compatcanary.report.v1",
+  "scanner": {
+    "name": "compatcanary",
+    "version": "0.2.2"
+  },
+  "target": {
+    "baseUrl": "http://127.0.0.1:11435/v1",
+    "model": "qwen2.5:1.5b",
+    "profile": "chat"
+  },
+  "startedAt": "2026-07-11T11:19:57.032Z",
+  "completedAt": "2026-07-11T11:20:02.734Z",
+  "durationMs": 5702,
+  "score": 73,
+  "compatible": false,
+  "summary": {
+    "passes": 4,
+    "warnings": 0,
+    "failures": 1,
+    "requiredFailures": 1,
+    "total": 5
+  },
+  "results": [
+    {
+      "id": "models.list",
+      "name": "Model discovery",
+      "category": "Discovery",
+      "required": false,
+      "weight": 0.5,
+      "status": "pass",
+      "summary": "Discovered 1 models; selected model is listed",
+      "evidence": {
+        "modelCount": 1,
+        "selectedModelListed": true
+      },
+      "durationMs": 49
+    },
+    {
+      "id": "chat.basic",
+      "name": "Chat Completions",
+      "category": "Chat",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Returned a structurally valid chat completion",
+      "evidence": {
+        "object": "chat.completion",
+        "finishReason": "stop"
+      },
+      "durationMs": 2795
+    },
+    {
+      "id": "chat.streaming",
+      "name": "Chat streaming",
+      "category": "Streaming",
+      "required": true,
+      "weight": 1,
+      "status": "pass",
+      "summary": "Received 4 valid chat stream chunks and [DONE]",
+      "evidence": {
+        "chunkCount": 4,
+        "metadataEventCount": 0,
+        "metadataObjectTypes": [],
+        "done": true
+      },
+      "durationMs": 470
+    },
+    {
+      "id": "chat.tool_call",
+      "name": "Forced tool call",
+      "category": "Tools",
+      "required": true,
+      "weight": 1.5,
+      "status": "fail",
+      "summary": "Expected a function tool call",
+      "error": {
+        "message": "Expected a function tool call"
+      },
+      "durationMs": 1880
+    },
+    {
+      "id": "chat.structured_output",
+      "name": "Strict structured output",
+      "category": "Structured output",
+      "required": true,
+      "weight": 1.5,
+      "status": "pass",
+      "summary": "Returned JSON satisfying a strict schema",
+      "evidence": {
+        "schemaSatisfied": true
+      },
+      "durationMs": 508
+    }
+  ]
+}
