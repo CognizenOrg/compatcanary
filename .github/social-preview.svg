@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">CompatCanary social preview</title>
+  <desc id="desc">CompatCanary tests whether OpenAI-compatible APIs actually behave compatibly.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06121f"/>
+      <stop offset="1" stop-color="#10253a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.22" cy="0.5" r="0.55">
+      <stop offset="0" stop-color="#ffd84d" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ffd84d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="640" rx="36" fill="url(#background)"/>
+  <rect width="1280" height="640" rx="36" fill="url(#glow)"/>
+  <g opacity="0.14" stroke="#92b4d0" stroke-width="1">
+    <path d="M0 120H1280M0 240H1280M0 360H1280M0 480H1280"/>
+    <path d="M160 0V640M320 0V640M480 0V640M640 0V640M800 0V640M960 0V640M1120 0V640"/>
+  </g>
+  <g transform="translate(88 138)">
+    <circle cx="160" cy="160" r="142" fill="#ffd84d"/>
+    <path d="M85 194c28-72 86-111 171-116-18 72-66 122-145 149-19 6-37-12-26-33Z" fill="#07111e" opacity="0.9"/>
+    <circle cx="212" cy="111" r="13" fill="#07111e"/>
+    <path d="m286 129 58 22-58 20Z" fill="#ff9d2e"/>
+    <path d="M151 279c27 23 57 35 91 37" fill="none" stroke="#07111e" stroke-width="14" stroke-linecap="round"/>
+    <path d="M119 308h88M220 308h78" fill="none" stroke="#ffd84d" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="470" y="148" fill="#ffd84d" font-size="34" font-weight="800" letter-spacing="5">COMPATCANARY</text>
+    <text x="470" y="236" fill="#f5f9fc" font-size="54" font-weight="750">Does “OpenAI-compatible”</text>
+    <text x="470" y="302" fill="#f5f9fc" font-size="54" font-weight="750">actually behave compatibly?</text>
+    <text x="470" y="378" fill="#b9ccda" font-size="27" font-weight="500">Live probes for streaming · tools · structured output</text>
+    <text x="470" y="420" fill="#b9ccda" font-size="27" font-weight="500">and Responses API behavior</text>
+    <rect x="470" y="482" width="620" height="62" rx="31" fill="#ffd84d"/>
+    <text x="780" y="523" fill="#07111e" font-size="25" font-weight="800" text-anchor="middle">CLI + GitHub Action · Reproducible evidence</text>
+  </g>
+</svg>

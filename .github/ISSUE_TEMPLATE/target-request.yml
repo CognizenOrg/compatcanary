@@ -1,0 +1,68 @@
+name: Request a compatibility target
+description: Suggest a provider, runtime, gateway, client, or model to test next
+title: "[target]: "
+labels: [enhancement, compatibility]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help prioritize the next reproducible compatibility setup. Do not include API keys, private endpoint URLs, customer prompts, or confidential response data.
+  - type: input
+    id: target
+    attributes:
+      label: Target
+      description: Name the provider, runtime, gateway, client, or model.
+      placeholder: vLLM 0.x, Ollama, a LiteLLM configuration, or another OpenAI-style endpoint
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: Compatibility question
+      description: What behavior is uncertain or currently causing integration work?
+      placeholder: Streaming tool-call chunks differ from the client expectation.
+    validations:
+      required: true
+  - type: checkboxes
+    id: capabilities
+    attributes:
+      label: Relevant capabilities
+      options:
+        - label: Model discovery
+        - label: Chat Completions
+        - label: Streaming
+        - label: Tool calling
+        - label: Structured output
+        - label: Responses API
+  - type: dropdown
+    id: can_run
+    attributes:
+      label: Can you run CompatCanary against this target?
+      options:
+        - Yes, and I can share a reviewed redacted report
+        - Yes, but I cannot share the report publicly
+        - No, I need someone with access to reproduce it
+    validations:
+      required: true
+  - type: dropdown
+    id: discovery
+    attributes:
+      label: How did you find CompatCanary?
+      options:
+        - GitHub search or topics
+        - GitHub Marketplace
+        - npm
+        - LiteLLM community
+        - LocalAI community
+        - Another repository or issue
+        - Search engine
+        - Other
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: This request contains no credentials, private endpoint URLs, customer prompts, or confidential response data.
+          required: true
