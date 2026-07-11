@@ -1,12 +1,33 @@
 # CompatCanary
 
-**Does an “OpenAI-compatible” API actually behave like one?**
+[![npm](https://img.shields.io/npm/v/compatcanary?label=npm)](https://www.npmjs.com/package/compatcanary)
+[![CI](https://github.com/CognizenOrg/compatcanary/actions/workflows/ci.yml/badge.svg)](https://github.com/CognizenOrg/compatcanary/actions/workflows/ci.yml)
+[![GitHub Marketplace](https://img.shields.io/badge/GitHub%20Marketplace-CompatCanary-2088FF?logo=github-actions&logoColor=white)](https://github.com/marketplace/actions/compatcanary)
 
-CompatCanary runs live, deterministic probes against an endpoint and produces evidence you can use locally, in CI, or in a compatibility report.
+**One command to find where an “OpenAI-compatible” API actually differs before the difference reaches production.**
+
+Requires Node.js 20 or newer:
+
+```bash
+npx --yes compatcanary@latest scan \
+  --base-url https://your-provider.example/v1 \
+  --model your-model
+```
+
+CompatCanary runs seven deterministic live probes for discovery, chat, streaming, tool calls, structured output, and the Responses API. It produces terminal, JSON, or Markdown evidence for local debugging, CI, and upstream reports.
+
+[View the compatibility matrix](COMPATIBILITY.md) · [Request a target](https://github.com/CognizenOrg/compatcanary/issues/new?template=target-request.yml) · [Use the GitHub Action](#github-action) · [Share feedback](https://github.com/CognizenOrg/compatcanary/discussions)
 
 See the [public compatibility matrix](COMPATIBILITY.md) for live, timestamped reports and reusable badges.
 
 > Early public release. CompatCanary is independent, is not affiliated with OpenAI, and does not provide official certification.
+
+## Who it helps
+
+- Gateway and proxy operators checking behavior across providers.
+- Inference-server maintainers validating compatibility across releases and backends.
+- Client and framework maintainers turning vague integration failures into reproducible evidence.
+- Platform teams catching regressions after endpoint, model, or routing changes.
 
 ## Why
 
@@ -28,15 +49,7 @@ The default `modern` profile covers Chat Completions plus the Responses API. Use
 | Responses API | Basic response object and output text |
 | Responses streaming | Typed `response.created`, output, and completion events |
 
-## Quickstart
-
-Requires Node.js 20 or newer.
-
-```bash
-npx --yes compatcanary@latest scan \
-  --base-url https://your-provider.example/v1 \
-  --model your-model
-```
+## Authentication and profiles
 
 For an authenticated endpoint:
 
@@ -108,6 +121,14 @@ Accepted JSON reports generate four public artifacts: a matrix row, provider/mod
 The evidence generator rejects common credential formats, URL credentials, query strings, fragments, and suspicious authorization fields. Reports still require human review before publication.
 
 To contribute, run a JSON scan with `--fail-on never`, review it, and open a [compatibility evidence issue](https://github.com/CognizenOrg/compatcanary/issues/new?template=compatibility-report.yml).
+
+## Help choose what to test next
+
+- [Request a provider, runtime, gateway, or model](https://github.com/CognizenOrg/compatcanary/issues/new?template=target-request.yml).
+- [Share a redacted compatibility report](https://github.com/CognizenOrg/compatcanary/issues/new?template=compatibility-report.yml).
+- [Ask a question or suggest a probe](https://github.com/CognizenOrg/compatcanary/discussions).
+
+If CompatCanary saves you integration time, starring the repository helps other maintainers discover the same checks.
 
 ## GitHub Action
 
