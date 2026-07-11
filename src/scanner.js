@@ -34,6 +34,10 @@ function reportUrl(rawUrl) {
   }
 }
 
+export function selectProbes(profile, probeSet = defaultProbes) {
+  return probeSet.filter((probe) => !probe.profiles || probe.profiles.includes(profile));
+}
+
 export async function scanEndpoint(options, probeSet = defaultProbes) {
   const startedAt = new Date();
   const config = {
@@ -44,9 +48,7 @@ export async function scanEndpoint(options, probeSet = defaultProbes) {
     timeoutMs: options.timeoutMs ?? 30_000,
   };
   const profile = options.profile ?? "modern";
-  const selectedProbes = probeSet.filter(
-    (probe) => !probe.profiles || probe.profiles.includes(profile),
-  );
+  const selectedProbes = selectProbes(profile, probeSet);
   const results = [];
 
   for (const probe of selectedProbes) {

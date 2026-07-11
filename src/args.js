@@ -25,6 +25,7 @@ export function parseArgs(argv, env = process.env) {
     failOn: "required",
     headers: {},
     help: false,
+    listProbes: false,
     version: false,
   };
 
@@ -41,6 +42,10 @@ export function parseArgs(argv, env = process.env) {
     }
     if (arg === "--version" || arg === "-v") {
       options.version = true;
+      continue;
+    }
+    if (arg === "--list-probes") {
+      options.listProbes = true;
       continue;
     }
     if (!VALUE_FLAGS.has(arg)) {
