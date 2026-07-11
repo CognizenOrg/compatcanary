@@ -1,6 +1,6 @@
 {
   "schemaVersion": "compatcanary.evidence-index.v1",
-  "updatedAt": "2026-07-10T22:24:55.511Z",
+  "updatedAt": "2026-07-11T11:21:35.604Z",
   "entries": [
     {
       "slug": "github-models-cohere-command-a",
@@ -148,6 +148,40 @@
       "page": "pages/github-models-mistral-small-2503.md",
       "badge": "badges/github-models-mistral-small-2503.svg",
       "sourceUrl": "https://docs.github.com/en/rest/models/inference"
+    },
+    {
+      "slug": "ollama-0-31-1-qwen2-5-1-5b-chat",
+      "provider": "Ollama",
+      "implementation": "Ollama Docker CPU",
+      "implementationVersion": "0.31.1",
+      "model": "qwen2.5:1.5b",
+      "profile": "chat",
+      "score": 73,
+      "compatible": false,
+      "status": "fail",
+      "scannedAt": "2026-07-11T11:20:02.734Z",
+      "report": "reports/ollama-0.31.1-qwen2.5-1.5b-chat.json",
+      "page": "pages/ollama-0-31-1-qwen2-5-1-5b-chat.md",
+      "badge": "badges/ollama-0-31-1-qwen2-5-1-5b-chat.svg",
+      "sourceUrl": "https://github.com/ollama/ollama/releases/tag/v0.31.1",
+      "setup": "setups/ollama-0.31.1-qwen2.5-1.5b.md"
+    },
+    {
+      "slug": "ollama-0-31-1-qwen2-5-1-5b-modern",
+      "provider": "Ollama",
+      "implementation": "Ollama Docker CPU",
+      "implementationVersion": "0.31.1",
+      "model": "qwen2.5:1.5b",
+      "profile": "modern",
+      "score": 100,
+      "compatible": true,
+      "status": "pass",
+      "scannedAt": "2026-07-11T11:21:35.604Z",
+      "report": "reports/ollama-0.31.1-qwen2.5-1.5b-modern.json",
+      "page": "pages/ollama-0-31-1-qwen2-5-1-5b-modern.md",
+      "badge": "badges/ollama-0-31-1-qwen2-5-1-5b-modern.svg",
+      "sourceUrl": "https://github.com/ollama/ollama/releases/tag/v0.31.1",
+      "setup": "setups/ollama-0.31.1-qwen2.5-1.5b.md"
     },
     {
       "slug": "github-models-openai-gpt-4-1-nano",

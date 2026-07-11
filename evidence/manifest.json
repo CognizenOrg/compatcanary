@@ -113,6 +113,28 @@
       "setup": "setups/localai-4.6.2-llama-3.2-1b.md",
       "submittedBy": "@guvenemre",
       "notes": "Model discovery, chat, streaming, strict JSON Schema output, Responses, and Responses streaming passed. The selected 1B model did not produce the forced function call."
+    },
+    {
+      "slug": "ollama-0-31-1-qwen2-5-1-5b-chat",
+      "provider": "Ollama",
+      "implementation": "Ollama Docker CPU",
+      "implementationVersion": "0.31.1",
+      "report": "reports/ollama-0.31.1-qwen2.5-1.5b-chat.json",
+      "sourceUrl": "https://github.com/ollama/ollama/releases/tag/v0.31.1",
+      "setup": "setups/ollama-0.31.1-qwen2.5-1.5b.md",
+      "submittedBy": "@guvenemre",
+      "notes": "Model discovery, basic chat, canonical SSE streaming, and strict structured output passed. This run did not return the forced function call; four repeated Chat-profile runs produced the call twice, so the setup records the observed model/runtime variability."
+    },
+    {
+      "slug": "ollama-0-31-1-qwen2-5-1-5b-modern",
+      "provider": "Ollama",
+      "implementation": "Ollama Docker CPU",
+      "implementationVersion": "0.31.1",
+      "report": "reports/ollama-0.31.1-qwen2.5-1.5b-modern.json",
+      "sourceUrl": "https://github.com/ollama/ollama/releases/tag/v0.31.1",
+      "setup": "setups/ollama-0.31.1-qwen2.5-1.5b.md",
+      "submittedBy": "@guvenemre",
+      "notes": "This independent Modern-profile run passed discovery, Chat Completions, canonical streaming, forced tool calls, strict structured output, the Responses API, and typed Responses streaming. See the setup for repeated-run tool-call variability."
     }
   ]
 }
