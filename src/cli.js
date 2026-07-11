@@ -4,7 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { parseArgs, validateScanOptions } from "./args.js";
 import { renderReport } from "./reporters.js";
-import { scanEndpoint, shouldFail } from "./scanner.js";
+import { scanEndpoint, selectProbes, shouldFail } from "./scanner.js";
 import { VERSION } from "./version.js";
 
 export { VERSION } from "./version.js";
@@ -16,6 +16,7 @@ Evidence-first compatibility scanner for OpenAI-style APIs.
 
 Usage:
   compatcanary scan --base-url URL --model MODEL [options]
+  compatcanary --profile PROFILE --list-probes
 
 Options:
   --base-url URL       API base URL, normally ending in /v1
@@ -28,6 +29,7 @@ Options:
   --output PATH        Write the report to a file instead of stdout
   --timeout SECONDS    Per-request timeout (default: 30)
   --fail-on MODE       required, any, or never (default: required)
+  --list-probes        List probes selected by the active profile and exit
   -h, --help           Show help
   -v, --version        Show version
 
@@ -35,10 +37,20 @@ Environment:
   OPENAI_BASE_URL, OPENAI_MODEL, OPENAI_API_KEY, COMPATCANARY_PROFILE
 
 Examples:
+  compatcanary --profile chat --list-probes
   compatcanary scan --base-url http://localhost:8000/v1 --model local-model
   compatcanary scan --base-url https://example.com/v1 --model example-model \\
     --format markdown --output compatcanary.md
 `;
+}
+
+export function probeListText(profile) {
+  const lines = selectProbes(profile).map((probe) => {
+    const requirement = probe.required ? "required" : "optional";
+    return `- ${probe.id}: ${probe.name} (${requirement}, weight ${probe.weight})`;
+  });
+
+  return [`CompatCanary probes for profile "${profile}":`, ...lines].join("\n");
 }
 
 export async function main(argv = process.argv.slice(2), io = console) {
@@ -50,6 +62,10 @@ export async function main(argv = process.argv.slice(2), io = console) {
     }
     if (options.version) {
       io.log(VERSION);
+      return 0;
+    }
+    if (options.listProbes) {
+      io.log(probeListText(options.profile));
       return 0;
     }
     validateScanOptions(options);

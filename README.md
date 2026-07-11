@@ -37,6 +37,15 @@ CompatCanary tests observed behavior instead of trusting a compatibility label.
 
 The default `modern` profile covers Chat Completions plus the Responses API. Use `--profile chat` when an implementation intentionally promises only the Chat Completions surface.
 
+Inspect either profile before making any network requests:
+
+```bash
+npx --yes compatcanary@latest --profile chat --list-probes
+npx --yes compatcanary@latest --profile modern --list-probes
+```
+
+Probe listing does not require a base URL, model, API key, or provider account.
+
 ## What v0.2 tests
 
 | Capability | What is verified |

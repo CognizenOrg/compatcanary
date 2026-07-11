@@ -42,6 +42,15 @@ test("reads conventional OpenAI environment variables", () => {
   assert.equal(options.apiKey, "test-key");
 });
 
+test("parses offline probe listing options", () => {
+  const options = parseArgs(["--profile", "chat", "--list-probes"], {});
+
+  assert.equal(options.profile, "chat");
+  assert.equal(options.listProbes, true);
+  assert.equal(options.baseUrl, "");
+  assert.equal(options.model, "");
+});
+
 test("rejects an invalid output format", () => {
   assert.throws(() => parseArgs(["--format", "yaml"], {}), /text, json, or markdown/);
 });
