@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and probe ideas
+    url: https://github.com/CognizenOrg/compatcanary/discussions
+    about: Ask for help or discuss a compatibility probe before opening an actionable issue.
+  - name: Security vulnerability
+    url: https://github.com/CognizenOrg/compatcanary/security/advisories/new
+    about: Report vulnerabilities privately instead of publishing sensitive details.
