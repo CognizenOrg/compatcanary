@@ -135,6 +135,28 @@
       "setup": "setups/ollama-0.31.1-qwen2.5-1.5b.md",
       "submittedBy": "@guvenemre",
       "notes": "This independent Modern-profile run passed discovery, Chat Completions, canonical streaming, forced tool calls, strict structured output, the Responses API, and typed Responses streaming. See the setup for repeated-run tool-call variability."
+    },
+    {
+      "slug": "vllm-0-19-0-qwen2-5-1-5b-chat",
+      "provider": "vLLM",
+      "implementation": "vLLM Docker + NVIDIA T4",
+      "implementationVersion": "0.19.0",
+      "report": "reports/vllm-0.19.0-qwen2.5-1.5b-chat.json",
+      "sourceUrl": "https://docs.vllm.ai/en/v0.19.0/deployment/docker/",
+      "setup": "setups/vllm-0.19.0-qwen2.5-1.5b.md",
+      "submittedBy": "@guvenemre",
+      "notes": "This Chat-profile run passed discovery, Chat Completions, canonical streaming, forced tool calls, and strict JSON Schema output on the bounded single-T4 setup."
+    },
+    {
+      "slug": "vllm-0-19-0-qwen2-5-1-5b-modern",
+      "provider": "vLLM",
+      "implementation": "vLLM Docker + NVIDIA T4",
+      "implementationVersion": "0.19.0",
+      "report": "reports/vllm-0.19.0-qwen2.5-1.5b-modern.json",
+      "sourceUrl": "https://docs.vllm.ai/en/v0.19.0/deployment/docker/",
+      "setup": "setups/vllm-0.19.0-qwen2.5-1.5b.md",
+      "submittedBy": "@guvenemre",
+      "notes": "This Modern-profile run passed all seven probes, including forced tool calls, strict JSON Schema output, the Responses API, and typed Responses streaming."
     }
   ]
 }

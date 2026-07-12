@@ -1,6 +1,6 @@
 {
   "schemaVersion": "compatcanary.evidence-index.v1",
-  "updatedAt": "2026-07-11T11:21:35.604Z",
+  "updatedAt": "2026-07-12T00:21:19.072Z",
   "entries": [
     {
       "slug": "github-models-cohere-command-a",
@@ -214,6 +214,40 @@
       "page": "pages/github-models-openai-gpt-4o-mini.md",
       "badge": "badges/github-models-openai-gpt-4o-mini.svg",
       "sourceUrl": "https://docs.github.com/en/rest/models/inference"
+    },
+    {
+      "slug": "vllm-0-19-0-qwen2-5-1-5b-chat",
+      "provider": "vLLM",
+      "implementation": "vLLM Docker + NVIDIA T4",
+      "implementationVersion": "0.19.0",
+      "model": "qwen2.5-1.5b-instruct",
+      "profile": "chat",
+      "score": 100,
+      "compatible": true,
+      "status": "pass",
+      "scannedAt": "2026-07-12T00:21:16.694Z",
+      "report": "reports/vllm-0.19.0-qwen2.5-1.5b-chat.json",
+      "page": "pages/vllm-0-19-0-qwen2-5-1-5b-chat.md",
+      "badge": "badges/vllm-0-19-0-qwen2-5-1-5b-chat.svg",
+      "sourceUrl": "https://docs.vllm.ai/en/v0.19.0/deployment/docker/",
+      "setup": "setups/vllm-0.19.0-qwen2.5-1.5b.md"
+    },
+    {
+      "slug": "vllm-0-19-0-qwen2-5-1-5b-modern",
+      "provider": "vLLM",
+      "implementation": "vLLM Docker + NVIDIA T4",
+      "implementationVersion": "0.19.0",
+      "model": "qwen2.5-1.5b-instruct",
+      "profile": "modern",
+      "score": 100,
+      "compatible": true,
+      "status": "pass",
+      "scannedAt": "2026-07-12T00:21:19.072Z",
+      "report": "reports/vllm-0.19.0-qwen2.5-1.5b-modern.json",
+      "page": "pages/vllm-0-19-0-qwen2-5-1-5b-modern.md",
+      "badge": "badges/vllm-0-19-0-qwen2-5-1-5b-modern.svg",
+      "sourceUrl": "https://docs.vllm.ai/en/v0.19.0/deployment/docker/",
+      "setup": "setups/vllm-0.19.0-qwen2.5-1.5b.md"
     }
   ]
 }
