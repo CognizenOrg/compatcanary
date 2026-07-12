@@ -17,6 +17,8 @@ CompatCanary publishes reproducible, timestamped observations rather than repeat
 | Ollama | Ollama Docker CPU 0.31.1 | `qwen2.5:1.5b` | `modern` | **100/100** | **PASS** | 2026-07-11 | [report](evidence/pages/ollama-0-31-1-qwen2-5-1-5b-modern.md) · [JSON](evidence/reports/ollama-0.31.1-qwen2.5-1.5b-modern.json) · ![badge](evidence/badges/ollama-0-31-1-qwen2-5-1-5b-modern.svg) |
 | OpenAI | GitHub Models hosted 2026-07-10 | `openai/gpt-4.1-nano` | `chat` | **86/100** | **PASS WITH WARNINGS** | 2026-07-10 | [report](evidence/pages/github-models-openai-gpt-4-1-nano.md) · [JSON](evidence/reports/github-models-openai-gpt-4.1-nano.json) · ![badge](evidence/badges/github-models-openai-gpt-4-1-nano.svg) |
 | OpenAI | GitHub Models hosted 2026-07-10 | `openai/gpt-4o-mini` | `chat` | **86/100** | **PASS WITH WARNINGS** | 2026-07-10 | [report](evidence/pages/github-models-openai-gpt-4o-mini.md) · [JSON](evidence/reports/github-models-openai-gpt-4o-mini.json) · ![badge](evidence/badges/github-models-openai-gpt-4o-mini.svg) |
+| vLLM | vLLM Docker + NVIDIA T4 0.19.0 | `qwen2.5-1.5b-instruct` | `chat` | **100/100** | **PASS** | 2026-07-12 | [report](evidence/pages/vllm-0-19-0-qwen2-5-1-5b-chat.md) · [JSON](evidence/reports/vllm-0.19.0-qwen2.5-1.5b-chat.json) · ![badge](evidence/badges/vllm-0-19-0-qwen2-5-1-5b-chat.svg) |
+| vLLM | vLLM Docker + NVIDIA T4 0.19.0 | `qwen2.5-1.5b-instruct` | `modern` | **100/100** | **PASS** | 2026-07-12 | [report](evidence/pages/vllm-0-19-0-qwen2-5-1-5b-modern.md) · [JSON](evidence/reports/vllm-0.19.0-qwen2.5-1.5b-modern.json) · ![badge](evidence/badges/vllm-0-19-0-qwen2-5-1-5b-modern.svg) |
 
 ## Add an endpoint
 
